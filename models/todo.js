@@ -5,7 +5,6 @@ var Schema = require('mongoose').Schema;
 var ObjectId = require('mongoose').ObjectId;
 var constant = require('../constant');
 var Tip = require('./tip');
-var Goal = require('./goal');
 
 var GoalPair = new Schema({
     goalId: ObjectId,
