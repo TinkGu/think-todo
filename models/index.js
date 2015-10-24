@@ -21,5 +21,8 @@ db.once('open', function openLog(){
 
 // dao
 module.exports = {
+    user: mongoose.model('user', require('./user')),
+    todo: mongoose.model('todo', require('./todo')),
+    goal: mongoose.model('goal', require('./goal'))
 
 }

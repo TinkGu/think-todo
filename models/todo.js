@@ -28,6 +28,8 @@ var Todo = new Schema({
     parentId: ObjectId, // 派生出该日程的父日程
     goalPairs: [GoalPair],
     tips: [Tip], // 小贴士列表, 可以关联地显示在日程中
+    completionRate: Number, // 完成百分比, (根据数值还能决定评级)
+
 
 });
 
