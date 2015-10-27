@@ -13,6 +13,7 @@
     "webpack": "^1.12.2"
   },
   "dependencies": {
+    "bluebird": "^2.10.2",
     "react": "^0.14.0"
   }
 }

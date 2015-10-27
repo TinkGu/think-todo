@@ -9,12 +9,13 @@ var Todo = require('./todo');
 var User = new Schema({
     name: String,
     pass: String,
+    email: String,
     avatar: Buffer,
     createDate: {type: Date, default: Date.now},
     groups: [ObjectId],
     friends: [ObjectId],
     todos: [Todo],
-    online: Boolean
+    //online: Boolean
 });
 
 module.exports = User;
