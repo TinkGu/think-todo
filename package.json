@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "bluebird": "^2.10.2",
-    "react": "^0.14.0"
+    "ejs": "^2.3.4",
+    "react": "^0.14.0",
+    "should": "^7.1.1"
   }
 }

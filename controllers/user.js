@@ -5,41 +5,30 @@ var async = require('asyncawait').async;
 var await = require('asyncawait').await;
 var models = require('../models');
 var User = models.user;
-var errHandler = require('../middlewares/err_handler');
-var UserService= require('../services/user');
 
-
-    //name: String,
-    //pass: String,
-    //avatar: Buffer,
-    //createDate: {type: Date, default: Date.now},
-    //groups: [ObjectId],
-    //friends: [ObjectId],
-    //todos: [Todo],
-    //online: Boolean
-
-exports.sign = async(function(req, res, next){
-    var username = req.query.username;
+exports.signIn = async(function(req, res, next){
+    var name = req.query.name;
     var pass = req.query.pass;
 
     try{
-        var user = await(User.findOne({name: username, pass: pass}).exec());
+        var user = await(User.findOne({name: name, pass: pass}).exec());
     }catch(err){
-        return errHandler.dbErr(res, err);
+        return res.status(500).end();
     }
-    if(typeof user === 'null'){
-        return errHandler.notFound(res, 'user');
+
+    if(!user){
+        return res.status(403).json({error: name + ' is not exist!'});
     }
+
     var userObj = user.toObject();
     delete userObj.pass;
 
-    // token 设置
     return res.json({
-        user: userObj
+        user: 'userObj'
     });
 });
 
-exports.create = async(function(req, res, next){
+exports.signUp = async(function(req, res, next){
     var name = req.body.name;
     var pass = req.body.pass;
     var email = req.body.email;
@@ -47,65 +36,105 @@ exports.create = async(function(req, res, next){
     try{
         var sameNameUser = await(User.findOne({name: name}).exec());
     }catch(err){
-        return errHandler.dbErr(res, err);
+        return res.status(500).end();
     }
     if(sameNameUser){
-        return errHandler.alreadyExist(res, 'user ' + name);
+        return res.status(403).json({error: name + ' has already existed!'}).end();
     }
 
     try{
         var sameEmailUser = await(User.findOne({email: email}).exec());
     }catch(err){
-        return errHandler.dbErr(res, err);
+        return res.status(500).end();
     }
     if(sameEmailUser){
-        return errHandler.alreadyExist(res, 'user ' + email);
+        return res.status(403).json({error: email + ' has already existed!'}).end();
     }
 
-    var userobj = {
+    var userObj = {
         name: name,
         email: email,
         pass: pass
     };
-    var user = await(User.create(userobj));
 
-    return res.status(200).end();
-});
-
-exports.update = async(function(req, res, next){
-    var name = req.params.name;
-
-
-});
-
-exports.updateName = async(function(req, res, next){
-    var name = req.params.name;
-    var newName = req.params.newName;
-
-    if(await(UserService.hasExisted({name: name}))){
-
+    try{
+        var user = await(User.create(userObj));
+    }catch(err){
+        return res.status(500).end();
     }
 
-})
+    return res.status(200).end();
 
-exports.delete();
+});
 
-exports.find();
-
-exports.findOne();
-
-exports.findOneWithPass();
-
-exports.getFriends();
-
-exports.getGroups();
-
-exports.getTodos();
-
-exports.getOnlineFriends();
-
-exports.removeGroups();
-
-exports.removeFriends();
-
-exports.removeTodos();
+//exports.updateName = async(function(req, res){
+//    var name = req.params.name;
+//    var newName = req.params.newName;
+//
+//    var user = await(UserService.getOne({name: name}));
+//    if(typeof user === 'null'){
+//        return res.status(403).end();
+//    }
+//
+//    user.name = newName;
+//    await(user.save());
+//
+//    return res.status(200).end();
+//});
+//
+//exports.updatePass = async(function(req, res){
+//    var name = req.params.name;
+//    var newPass = req.params.newPass;
+//
+//    var user = await(UserService.getOne({name: name}));
+//    if(typeof user === 'null'){
+//        return res.status(403).end();
+//    }
+//
+//    user.pass = newPass;
+//    await(user.save());
+//
+//    return res.status(200).end();
+//
+//});
+//
+//exports.updateEmail = async(function(req, res){
+//    var name = req.params.name;
+//    var newEmail = req.params.newEmail;
+//
+//    var user = await(UserService.getOne({name: name}));
+//    if(typeof user === 'null'){
+//        return res.status(403).end();
+//    }
+//
+//    user.email = newEmail;
+//    await(user.save());
+//
+//    return res.status(200).end();
+//});
+//
+//exports.deleteOne = async(function(req, res){
+//    var name = req.params.name;
+//
+//
+//});
+//
+//exports.find();
+//
+//exports.findOne();
+//
+//exports.findOneWithPass();
+//
+//exports.getFriends();
+//
+//exports.getGroups();
+//
+//exports.getTodos();
+//
+//exports.getOnlineFriends();
+//
+//exports.removeGroups();
+//
+//exports.removeFriends();
+//
+//exports.removeTodos();

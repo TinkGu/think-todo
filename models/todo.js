@@ -2,14 +2,14 @@
  * Created by Tink on 2015/10/23.
  */
 var Schema = require('mongoose').Schema;
-var ObjectId = require('mongoose').ObjectId;
+var ObjectId = require('mongoose').Schema.Types.ObjectId;
 var constant = require('../constant');
 var Tip = require('./tip');
 
 var GoalPair = new Schema({
     goalId: ObjectId,
     score: Number, // 完成这次日程后, goalId指向的目标增长的经验值
-})
+});
 
 
 var Todo = new Schema({
