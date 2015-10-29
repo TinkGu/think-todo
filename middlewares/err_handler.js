@@ -2,11 +2,8 @@
  * Created by Tink on 2015/10/24.
  */
 
-var ErrorCode = {
-    NOT_EXISTED: 'not existed',
-    ALREADY_EXISTED: 'already existed'
-
-}
+var constant = require('../constant');
+var ErrorCode = constant.ErrorCode;
 
 var genErrorMessage = {
     notExisted: function(entity, condition){

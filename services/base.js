@@ -8,6 +8,15 @@ var errorHandler = require('../middlewares/err_handler');
 var ErrorCode = errorHandler.ErrorCode;
 var genErrorMessage = errorHandler.genErrorMessage;
 
+var create = async(function(model, obj, res){
+    try{
+        return await(models[model].create(obj));
+    }catch(err){
+        res.status(500).end();
+        throw err;
+    }
+});
+
 var getOne = async(function(model, condition, res){
     try{
         return await(models[model].findOne(condition).exec());
@@ -35,6 +44,7 @@ var checkUnique = async(function(model, condition, res){
 });
 
 module.exports = {
+    create: create,
     getOne: getOne,
     getOneExisted: getOneExisted,
     checkUnique: checkUnique

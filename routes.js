@@ -3,6 +3,7 @@
  */
 
 var user = require('./controllers/user');
+var todo = require('./controllers/todo');
 
 module.exports = function route(app){
 
@@ -18,5 +19,6 @@ module.exports = function route(app){
     //
     //// todo
     //app.get()
+    app.post('/todo', todo.createOne);
 
 }

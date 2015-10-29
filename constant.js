@@ -3,6 +3,11 @@
  */
 
 module.exports = {
+    ErrorCode: {
+        NOT_EXISTED: 'not existed',
+        ALREADY_EXISTED: 'already existed'
+
+    },
     TodoPriority: {
         NORMAL: 'normal',
         EMERGENCY: 'emergency',

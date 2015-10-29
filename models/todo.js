@@ -14,9 +14,10 @@ var GoalPair = new Schema({
 
 var Todo = new Schema({
     title: String,
-    desc: String,
+    desc: {type: String, default: ''},
     actor: ObjectId, // 执行者
     recurrence: {type: String}, // 日程重复模式
+    //weekBasedRecurrence: Boolean,
     status: {type: String, default: constant.TodoStatus.ONGOING},
     priority: {type: String, default: constant.TodoPriority.NORMAL}, // 日程优先级
     createDate: {type: Date, default: Date.now},

@@ -46,7 +46,7 @@ exports.signUp = async(function(req, res, next){
     };
 
     try{
-        var user = await(User.create(userObj));
+        await(User.create(userObj));
     }catch(err){
         return res.status(500).end();
     }
