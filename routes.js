@@ -12,8 +12,8 @@ module.exports = function route(app){
         res.render('index.html');
     });
 
-    app.get('/signIn', user.signIn);
-    app.post('/signUp', user.signUp);
+    app.get('/sign', user.signIn);
+    app.post('/sign', user.signUp);
 
     //
     //// todo

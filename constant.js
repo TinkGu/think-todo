@@ -3,9 +3,6 @@
  */
 
 module.exports = {
-    ErrorCode: {
-
-    },
     TodoPriority: {
         NORMAL: 'normal',
         EMERGENCY: 'emergency',

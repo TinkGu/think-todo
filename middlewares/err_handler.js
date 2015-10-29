@@ -2,15 +2,27 @@
  * Created by Tink on 2015/10/24.
  */
 
-module.exports = {
-    dbErr: function handleEbErr(res, err){
-        console.log(err);
-        return res.status(500).json({err: 'db error'});
+var ErrorCode = {
+    NOT_EXISTED: 'not existed',
+    ALREADY_EXISTED: 'already existed'
+
+}
+
+var genErrorMessage = {
+    notExisted: function(entity, condition){
+        return genQueryError('this ' + entity + ' does not exist!', condition);
     },
-    notFound: function handleNotFound(res, entity){
-        return res.status(500).json({err: entity + ' not found'});
-    },
-    alreadyExist: function handleAlreadyExist(res, entity){
-        return res.status(500).json({err: entity + ' already exist'});
+    alreadyExisted: function(entity, condition){
+        return genQueryError('this ' + entity + ' has already existed!', condition);
     }
+}
+
+var genQueryError = function(desc, condition){
+    return desc + ' \n see query condition: ' + JSON.stringify(condition);
+}
+
+
+module.exports = {
+    ErrorCode: ErrorCode,
+    genErrorMessage: genErrorMessage
 }

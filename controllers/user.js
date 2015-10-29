@@ -5,19 +5,17 @@ var async = require('asyncawait').async;
 var await = require('asyncawait').await;
 var models = require('../models');
 var User = models.user;
+var UserService = require('../services/user');
 
 exports.signIn = async(function(req, res, next){
     var name = req.query.name;
     var pass = req.query.pass;
 
     try{
-        var user = await(User.findOne({name: name, pass: pass}).exec());
+        var user = await(UserService.getOneExisted({name: name, pass: pass}, res));
     }catch(err){
-        return res.status(500).end();
-    }
-
-    if(!user){
-        return res.status(403).json({error: name + ' is not exist!'});
+        console.log(err.stack);
+        return;
     }
 
     var userObj = user.toObject();
@@ -34,21 +32,11 @@ exports.signUp = async(function(req, res, next){
     var email = req.body.email;
 
     try{
-        var sameNameUser = await(User.findOne({name: name}).exec());
+        await(UserService.checkUnique({name: name}, res));
+        await(UserService.checkUnique({email: email}, res));
     }catch(err){
-        return res.status(500).end();
-    }
-    if(sameNameUser){
-        return res.status(403).json({error: name + ' has already existed!'}).end();
-    }
-
-    try{
-        var sameEmailUser = await(User.findOne({email: email}).exec());
-    }catch(err){
-        return res.status(500).end();
-    }
-    if(sameEmailUser){
-        return res.status(403).json({error: email + ' has already existed!'}).end();
+        console.log(err.stack);
+        return;
     }
 
     var userObj = {
@@ -64,7 +52,6 @@ exports.signUp = async(function(req, res, next){
     }
 
     return res.status(200).end();
-
 });
 
 //exports.updateName = async(function(req, res){

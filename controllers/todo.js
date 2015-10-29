@@ -5,10 +5,15 @@ var async = require('asyncawait').async;
 var await = require('asyncawait').await;
 var models = require('../models');
 var Todo = models.todo;
+var Service = require('../services/base');
 
-//exports.createOne = async(function(req, res){
-//
-//});
+exports.createOne = async(function(req, res){
+    var title = req.body.title;
+    var desc = req.body.desc;
+    var actor = req.body.actor;
+
+
+});
 //
 //exports.addGoals();
 //
