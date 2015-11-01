@@ -6,7 +6,7 @@ var supertest = require('supertest');
 var request = supertest(app);
 var should = require('should');
 
-//describe('test/controllers/user.test.js', function(){
+//describe('test/controllers/user.test.scripts', function(){
 //
 //    describe('#signUp', function(){
 //        it('should post /sign 200', function(done){

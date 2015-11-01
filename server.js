@@ -31,7 +31,6 @@ routes(app);
 
 // error handler
 
-
 //server listener
 server.listen(app.get('port'), function serverListener(){
     console.log('Server is listening on port: ' + app.get('port'));

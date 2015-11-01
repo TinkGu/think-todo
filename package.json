@@ -9,6 +9,8 @@
   "author": "Tink",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^5.5.4",
+    "babel-loader": "^5.1.4",
     "jsx-loader": "^0.13.2",
     "supertest": "^1.1.0",
     "webpack": "^1.12.2"
@@ -16,6 +18,7 @@
   "dependencies": {
     "bluebird": "^2.10.2",
     "ejs": "^2.3.4",
+    "jsx-loader": "^0.13.2",
     "react": "^0.14.0",
     "should": "^7.1.1"
   }
