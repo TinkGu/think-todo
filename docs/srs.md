@@ -64,7 +64,7 @@ todoLoopStyle: {
 >     3. 每天
 >         直接把nextDate保持在当天就好了
 
----
+
 ## goal
 目标
 + 添加目标
@@ -80,10 +80,8 @@ var Goal = new Schema({
     score                   : { type:Number, default: 0 }
 })
 ```
----
 
 ## log (later)
----
 
 ## user (later)
 用户管理模块
